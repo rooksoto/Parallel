@@ -8,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activitylogin.login.FragmentLoginLogin;
+import com.rooksoto.parallel.utility.AppContext;
 
 public class FragmentLoginCreateAccount extends Fragment implements BaseView {
     private FragmentLoginCreateAccountPresenter fragmentLoginCreateAccountPresenter = new FragmentLoginCreateAccountPresenter();
@@ -38,18 +40,31 @@ public class FragmentLoginCreateAccount extends Fragment implements BaseView {
 
     @Override
     public void setViews () {
-        EditText editTextEmail = (EditText) view.findViewById(R.id.fragment_login_createaccount_edittext_email);
-        EditText editTextUsername = (EditText) view.findViewById(R.id.fragment_login_createaccount_edittext_username);
-        EditText editTextPassword = (EditText) view.findViewById(R.id.fragment_login_createaccount_edittext_password);
+        final EditText editTextEmail = (EditText) view.findViewById(R.id.fragment_login_createaccount_edittext_email);
+        final EditText editTextUsername = (EditText) view.findViewById(R.id.fragment_login_createaccount_edittext_username);
+        final EditText editTextPassword = (EditText) view.findViewById(R.id.fragment_login_createaccount_edittext_password);
         Button buttonCreateAccount = (Button) view.findViewById(R.id.fragment_login_createaccount_button_createaccount);
 
-        email = editTextEmail.getText().toString();
-        username = editTextUsername.getText().toString();
-        password = editTextPassword.getText().toString();
 
         buttonCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
+                if (editTextEmail.getText().toString().isEmpty()) {
+                    Toast.makeText(AppContext.getAppContext(), "Missing Email Address - Please Enter", Toast.LENGTH_SHORT).show();
+                } else {
+                    email = editTextEmail.getText().toString();
+                }
+                if (editTextUsername.getText().toString().isEmpty()) {
+                    Toast.makeText(AppContext.getAppContext(), "Missing Username - Please Enter", Toast.LENGTH_SHORT).show();
+                } else {
+                    username = editTextUsername.getText().toString();
+                }
+                if (editTextPassword.getText().toString().isEmpty()) {
+                    Toast.makeText(AppContext.getAppContext(), "Missing Password - Please Enter", Toast.LENGTH_SHORT).show();
+                } else {
+                    password = editTextPassword.getText().toString();
+                }
+
                 fragmentLoginCreateAccountPresenter.createNewAccount(email, username, password);
                 fragmentLoginCreateAccountPresenter.setOnClickReplace(new FragmentLoginLogin(), view, containerID, "Login");
             }
