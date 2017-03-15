@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.activityHub;
+package com.rooksoto.parallel.activityhub;
 
 import android.content.res.Resources;
 import android.os.Bundle;
