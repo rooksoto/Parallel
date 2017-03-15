@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activitylogin.login.FragmentLoginLogin;
+import com.rooksoto.parallel.utility.CustomAlertDialog;
 
 public class FragmentLoginSplash extends Fragment implements BaseView {
     private FragmentLoginSplashPresenter fragmentLoginSplashPresenter = new FragmentLoginSplashPresenter();
@@ -49,7 +50,7 @@ public class FragmentLoginSplash extends Fragment implements BaseView {
         parallelWordLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                fragmentLoginSplashPresenter.setOnClickReplace(new FragmentLoginLogin().newInstance(true), parallelWordLeft, containerID, "Login");
+                //fragmentLoginSplashPresenter.setOnClickReplace(new FragmentLoginLogin().newInstance(true), parallelWordLeft, containerID, "Login");
             }
         });
 
@@ -64,11 +65,13 @@ public class FragmentLoginSplash extends Fragment implements BaseView {
                 splashWordAnimation();
             }
         }, 1250);
-    }
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run () {
+                fragmentLoginSplashPresenter.setOnClickReplace(new FragmentLoginLogin().newInstance(true), parallelWordLeft, containerID, "Login");
+            }
+        }, 3000);
 
-    @Override
-    public void onBackPressed () {
-        fragmentLoginSplashPresenter.onBackPressedOverride(view);
     }
 
     private void splashWordAnimation () {
