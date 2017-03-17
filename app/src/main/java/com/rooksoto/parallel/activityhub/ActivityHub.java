@@ -1,6 +1,11 @@
 package com.rooksoto.parallel.activityhub;
 
+import android.app.Activity;
+import android.app.Fragment;
+import android.content.Context;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -44,6 +49,24 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         setContentView(R.layout.activity_hub);
         activityHubPresenter = new ActivityHubPresenter(this);
         initialize();
+    }
+
+    @Override
+    public void setOnClickReplace (Fragment fragmentP, View viewP, int containerID, String id) {
+        if (!isOnline(viewP)) {
+            Toast.makeText(viewP.getContext(), "Cannot Connect - Please Check Internet Connection", Toast.LENGTH_SHORT).show();
+        } else {
+            ((Activity) viewP.getContext()).getFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.animator.animator_fade_in, R.animator.animator_fade_out)
+                    .replace(containerID, fragmentP, id)
+                    .commit();
+        }
+    }
+
+    private boolean isOnline (View viewP) {
+        ConnectivityManager connManager = (ConnectivityManager) viewP.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnectedOrConnecting();
     }
 
     public void setupViewpager() {

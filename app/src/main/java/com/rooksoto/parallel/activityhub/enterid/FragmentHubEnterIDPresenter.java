@@ -60,7 +60,7 @@ public class FragmentHubEnterIDPresenter implements BasePresenter {
     }
 
     // TODO: 3/12/17 - ROOK - Implement check for valid eventID. See comments. 
-    void checkEventID (final String enteredEventID, DatabaseReference reference) {
+    void checkEventID (final String enteredEventID, final DatabaseReference reference) {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -79,9 +79,9 @@ public class FragmentHubEnterIDPresenter implements BasePresenter {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Handle cancellation
+                Log.d(TAG, "onCancelled: " + reference + enteredEventID);
                 Log.d(TAG, "onCancelled: " + databaseError.getMessage());
             }
         });
-
     }
 }

@@ -1,5 +1,6 @@
 package com.rooksoto.parallel.activityhub;
 
+import android.app.Fragment;
 import android.view.View;
 
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
@@ -41,6 +42,8 @@ public class ActivityHubPresenter {
     }
 
     public interface Listener {
+        void setOnClickReplace (Fragment fragmentP, View viewP, int containerID, String id);
+
         void setupViewpager();
 
         void checkLocationServices(ParallelLocation locationService);

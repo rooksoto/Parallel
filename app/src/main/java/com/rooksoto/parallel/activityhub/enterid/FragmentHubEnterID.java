@@ -73,10 +73,10 @@ public class FragmentHubEnterID extends Fragment implements BaseView {
             public void onClick (View v) {
                 OnClickEffect.setButton(buttonEnter);
                 // Initialize Global Var "eventID" on button click
-                ParallelLocation.eventID = textViewEventID.getText().toString();
+                ParallelLocation.eventID = "/" + textViewEventID.getText().toString();
                 reference = database.getReference();
                 fragmentHubEnterIDPresenter.checkEventID(ParallelLocation.eventID, reference);
-                // TODO: 3/16/17 Start the questions fragment only if eventID is valid 
+                // TODO: 3/16/17 Start the questions fragment only if eventID is valid
 //                fragmentHubEnterIDPresenter.setOnClickReplace(fragmentHubQuestions, buttonEnter, containerID, "Questions");
             }
         });

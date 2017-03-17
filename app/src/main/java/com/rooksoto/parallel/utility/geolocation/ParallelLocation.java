@@ -166,7 +166,7 @@ public class ParallelLocation {
                     .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT)
                     .build();
             GeofencingRequest geofencingRequest = new GeofencingRequest.Builder()
-                    .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
+                    .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_EXIT)
                     .addGeofence(geofence)
                     .build();
             Intent intent = new Intent(context, GeofenceService.class);
