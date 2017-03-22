@@ -8,7 +8,6 @@ import android.view.animation.Animation;
 
 import com.rooksoto.parallel.BasePresenter;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.utility.CustomAlertDialog;
 
 public class FragmentLoginSplashPresenter implements BasePresenter {
     private View viewAnimatorSet1;

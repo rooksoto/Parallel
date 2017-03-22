@@ -121,7 +121,8 @@ public class FragmentLoginLogin extends Fragment implements FragmentLoginLoginPr
             public void onClick(View v) {
                 //fragmentLoginLoginPresenter.checkLoginInfo(username, password);
 //                loginFragmentPresenter.onGeneralLoginClicked(new FragmentLoginWait(), signInButton, containerID, "Wait");
-                loginFragmentPresenter.onGeneralLoginClicked(WAIT);
+                //loginFragmentPresenter.onGeneralLoginClicked(WAIT);
+                Toast.makeText(view.getContext(), "Please sign in using your Google account.", Toast.LENGTH_SHORT).show();
             }
         });
         final TextView textViewCreateAccount = (TextView) view.findViewById(R.id.fragment_login_login_button_createaccount);

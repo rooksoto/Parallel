@@ -7,8 +7,8 @@ android {
         applicationId "com.rooksoto.parallel"
         minSdkVersion 21
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -22,6 +22,9 @@ android {
 
     buildTypes.each {
         it.buildConfigField 'String', 'OAUTHCLIENTID', OAuthClientID
+    }
+    lintOptions {
+        abortOnError false
     }
 }
 
