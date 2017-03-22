@@ -15,8 +15,8 @@ import android.view.ViewGroup;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.utility.PinView;
-import com.rooksoto.parallel.utility.widgets.recyclerview.AttendeesAdapter;
+import com.rooksoto.parallel.utility.widgets.pinview.PinView;
+import com.rooksoto.parallel.utility.widgets.recyclerview.attendeesandevents.AttendeesAdapter;
 
 public class FragmentEventMap extends Fragment implements FragmentEventMapPresenter.Listener {
     private View rootView;
@@ -28,7 +28,7 @@ public class FragmentEventMap extends Fragment implements FragmentEventMapPresen
     private PointF coordinatePressed;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate (@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fragEventMapPresenter = FragmentEventMapPresenter.getInstance(this);
         fragEventMapPresenter.onCreation();
@@ -36,7 +36,7 @@ public class FragmentEventMap extends Fragment implements FragmentEventMapPresen
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView (LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_hub_event_map, container, false);
         imageView = (PinView) rootView.findViewById(R.id.imageView);
         bottomSheet = (BottomSheetLayout) rootView.findViewById(R.id.bottomsheet);
@@ -46,25 +46,25 @@ public class FragmentEventMap extends Fragment implements FragmentEventMapPresen
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated (View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         fragEventMapPresenter.onViewCreated();
         imageView.setImage(ImageSource.resource(R.drawable.floorplan));
     }
 
     @Override
-    public void onStart() {
+    public void onStart () {
         super.onStart();
         fragEventMapPresenter.onStartup();
     }
 
     @Override
-    public void onResume() {
+    public void onResume () {
         super.onResume();
         final GestureDetector gestureDetector = new GestureDetector(getActivity(),
                 new GestureDetector.SimpleOnGestureListener() {
                     @Override
-                    public void onLongPress(MotionEvent e) {
+                    public void onLongPress (MotionEvent e) {
                         super.onLongPress(e);
                         if (imageView.isReady()) {
                             coordinatePressed = imageView.viewToSourceCoord(e.getX(), e.getY());
@@ -75,7 +75,7 @@ public class FragmentEventMap extends Fragment implements FragmentEventMapPresen
                 });
         imageView.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public boolean onTouch (View view, MotionEvent motionEvent) {
                 return gestureDetector.onTouchEvent(motionEvent);
             }
         });
@@ -83,12 +83,12 @@ public class FragmentEventMap extends Fragment implements FragmentEventMapPresen
     }
 
     @Override
-    public void onStop() {
+    public void onStop () {
         super.onStop();
     }
 
     @Override
-    public void setViews(AttendeesAdapter attendeesAdapter) {
+    public void setViews (AttendeesAdapter attendeesAdapter) {
         // get bottom sheet view
         recyclerViewAttendees = (RecyclerView) sheetView.findViewById(R.id.fragment_hub_attendees_recyclerview);
         recyclerViewAttendees.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
@@ -96,17 +96,17 @@ public class FragmentEventMap extends Fragment implements FragmentEventMapPresen
     }
 
     @Override
-    public PointF getCoordinates() {
+    public PointF getCoordinates () {
         return coordinatePressed;
     }
 
     @Override
-    public void populatePin(String tag, PointF coordinates) {
+    public void populatePin (String tag, PointF coordinates) {
         imageView.addPin(tag, coordinates);
     }
 
     @Override
-    public void closeSheet() {
+    public void closeSheet () {
         bottomSheet.dismissSheet();
     }
 }

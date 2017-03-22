@@ -11,7 +11,6 @@ import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItem;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItems;
 import com.rooksoto.parallel.BasePresenter;
-import com.rooksoto.parallel.utility.CustomAlertDialog;
 
 public class FragmentLoginWaitPresenter implements BasePresenter {
     private View view;

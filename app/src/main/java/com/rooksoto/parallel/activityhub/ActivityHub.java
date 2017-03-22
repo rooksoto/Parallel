@@ -54,42 +54,68 @@ import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.widgets.camera2.Camera2BasicFragment;
 
 public class ActivityHub extends AppCompatActivity implements ActivityHubPresenter.Listener {
-    private ActivityHubPresenter activityHubPresenter;
-
-    private View view;
-
-    private int containerID = R.id.content_frame;
     private static final String TAG = "ActivityHub";
+    ParallelLocation location;
+    AlertDialog alertDialog;
+    private ActivityHubPresenter activityHubPresenter;
+    private View view;
+    private int containerID = R.id.content_frame;
     private ViewPager viewPager;
     private SmartTabLayout viewPagerTab;
     private FragmentPagerItems pages;
     private Handler handler = new Handler();
-
-    ParallelLocation location;
-
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
     private FirebaseDatabase database;
     private DatabaseReference reference;
     private DatabaseReference attendeeList;
+    private BroadcastReceiver geofenceTriggerReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive (Context context, Intent intent) {
+            String message = intent.getStringExtra("message");
+            Log.d("TAG", "onReceive: Received Geofence Exit Trigger");
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 
-    AlertDialog alertDialog;
+            alertDialog = new AlertDialog.Builder(AppContext.getAppContext()).create();
+            alertDialog.setTitle("You've Left The Event");
+            alertDialog.setMessage("Logging out in 01:00");
+            alertDialog.setCancelable(false);
+            alertDialog.show();
+
+            new CountDownTimer(59000, 1000) {
+                @Override
+                public void onTick (long millisUntilFinished) {
+                    alertDialog.setMessage(
+                            "Logging out in 00:" + (millisUntilFinished / 1000)
+                    );
+                    if (millisUntilFinished <= 0) {
+                        logOutAndRemoveFromParallel();
+                    }
+                }
+
+                @Override
+                public void onFinish () {
+                    logOutAndRemoveFromParallel();
+                }
+            }.start();
+        }
+    };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hub);
         activityHubPresenter = new ActivityHubPresenter(this);
         initialize();
     }
 
-    public void setupViewpager() {
+    public void setupViewpager () {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
         Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
         viewPager.startAnimation(fadeIn);
         handler.postDelayed(new Runnable() {
-            public void run() {
+            public void run () {
                 viewPagerTab.setVisibility(View.VISIBLE);
             }
         }, 100);
@@ -109,7 +135,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
 
         viewPagerTab.setCustomTabView(new SmartTabLayout.TabProvider() {
                                           @Override
-                                          public View createTabView(ViewGroup container, int position, PagerAdapter adapter) {
+                                          public View createTabView (ViewGroup container, int position, PagerAdapter adapter) {
                                               ImageView icon = (ImageView) inflater.inflate(R.layout.custom_tab_icon, container,
                                                       false);
                                               switch (position) {
@@ -145,11 +171,11 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     }
 
     @Override
-    protected void onStart() {
+    protected void onStart () {
         super.onStart();
     }
 
-    public void initialize() {
+    public void initialize () {
         location = ParallelLocation.getInstance();
         checkForGoogleApiAvail();
         view = getWindow().getDecorView().getRootView();
@@ -165,49 +191,18 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         setupReceiver();
     }
 
-    private void setupReceiver() {
+    private void setupReceiver () {
         LocalBroadcastManager.getInstance(this).registerReceiver(geofenceTriggerReceiver,
                 new IntentFilter("geofence_exit"));
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume () {
         super.onResume();
 
     }
 
-    private BroadcastReceiver geofenceTriggerReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String message = intent.getStringExtra("message");
-            Log.d("TAG", "onReceive: Received Geofence Exit Trigger");
-            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-
-            alertDialog = new AlertDialog.Builder(AppContext.getAppContext()).create();
-            alertDialog.setTitle("You've Left The Event");
-            alertDialog.setMessage("Logging out in 01:00");
-            alertDialog.setCancelable(false);
-            alertDialog.show();
-
-            new CountDownTimer(59000, 1000) {
-                @Override
-                public void onTick(long millisUntilFinished) {
-                    alertDialog.setMessage(
-                            "Logging out in 00:"+ (millisUntilFinished/1000)
-                    );
-                    if (millisUntilFinished <= 0) {
-                        logOutAndRemoveFromParallel();
-                    }
-                }
-                @Override
-                public void onFinish() {
-                    logOutAndRemoveFromParallel();
-                }
-            }.start();
-        }
-    };
-
-    private void loadFragmentEnterID() {
+    private void loadFragmentEnterID () {
         SmartTabLayout smartTabLayout = (SmartTabLayout) findViewById(R.id.viewpagertab);
         smartTabLayout.setVisibility(View.INVISIBLE);
 
@@ -218,7 +213,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed () {
         Fragment currentFrag = getFragmentManager().findFragmentById(containerID);
         if (currentFrag instanceof FragmentHubEnterID || currentFrag instanceof FragmentHubQuestions) {
             CustomAlertDialog customAlertDialog = new CustomAlertDialog();
@@ -229,24 +224,24 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     }
 
     @Override
-    protected void onStop() {
+    protected void onStop () {
         super.onStop();
         activityHubPresenter.onStop();
     }
 
     @Override
-    public void checkLocationServices(ParallelLocation locationService) {
+    public void checkLocationServices (ParallelLocation locationService) {
         locationService.startGeofenceMonitoring(AppContext.getAppContext());
 
     }
 
     @Override
-    public void disconnectLocationService(ParallelLocation locationService) {
+    public void disconnectLocationService (ParallelLocation locationService) {
         locationService.disconnect();
     }
 
     @Override
-    public void activateParallelEvent(String enteredEventID) {
+    public void activateParallelEvent (String enteredEventID) {
         ParallelLocation.eventID = enteredEventID;
         final FragmentHubQuestions fragmentHubQuestions = new FragmentHubQuestions(this);
         if (!isOnline()) {
@@ -262,7 +257,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     }
 
     @Override
-    public void showEventIdError(String enteredEventID) {
+    public void showEventIdError (String enteredEventID) {
         Toast.makeText(this,
                 "The event \"" + enteredEventID + "\" does not exist! Please enter a valid Event ID.",
                 Toast.LENGTH_SHORT)
@@ -270,7 +265,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         ;
     }
 
-    private boolean isOnline() {
+    private boolean isOnline () {
         ConnectivityManager connManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
 
@@ -278,19 +273,19 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onDestroy () {
         super.onDestroy();
         logOutAndRemoveFromParallel();
     }
 
-    private void logOutAndRemoveFromParallel() {
+    private void logOutAndRemoveFromParallel () {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(geofenceTriggerReceiver);
         location.stopGeofenceMonitoring();
         attendeeList.child(firebaseUser.getUid()).getRef().removeValue();
         firebaseAuth.signOut();
     }
 
-    private void checkForGoogleApiAvail() {
+    private void checkForGoogleApiAvail () {
         int hasGpsInstalled = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this);
         if (hasGpsInstalled != ConnectionResult.SUCCESS) {
             GoogleApiAvailability.getInstance().getErrorDialog(this, hasGpsInstalled, 1).show();
@@ -300,14 +295,14 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    private void getLocationPermissions() {
-        requestPermissions(new String[]{
+    @RequiresApi (api = Build.VERSION_CODES.M)
+    private void getLocationPermissions () {
+        requestPermissions(new String[] {
                         Manifest.permission.ACCESS_FINE_LOCATION,
                         Manifest.permission.ACCESS_COARSE_LOCATION},
                 9999);
         ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
                 999
         );
     }

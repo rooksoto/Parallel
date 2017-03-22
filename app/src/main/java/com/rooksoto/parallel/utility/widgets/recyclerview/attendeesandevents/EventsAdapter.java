@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.utility.widgets.recyclerview;
+package com.rooksoto.parallel.utility.widgets.recyclerview.attendeesandevents;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

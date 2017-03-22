@@ -9,15 +9,15 @@ public class User {
     String name;
     String email;
     String pictureLink;
-    List<Answers> listofAnswers = new ArrayList <>();
+    List <Answers> listofAnswers = new ArrayList <>();
 
-    public User(String name, String email, String pictureLink) {
+    public User (String name, String email, String pictureLink) {
         this.name = name;
         this.email = email;
         this.pictureLink = pictureLink;
     }
 
-    public User(String name, String email, String pictureLink, String uid) {
+    public User (String name, String email, String pictureLink, String uid) {
         this.name = name;
         this.email = email;
         this.uid = uid;
@@ -29,7 +29,7 @@ public class User {
         this.email = emailParam;
     }
 
-    public User(String userName, String email, String profilePic, List<Answers> listofAnswers) {
+    public User (String userName, String email, String profilePic, List <Answers> listofAnswers) {
         this.name = userName;
         this.email = email;
         this.pictureLink = profilePic;
@@ -52,7 +52,7 @@ public class User {
         this.pictureLink = pictureLinkParam;
     }
 
-    public List<Answers> getListofAnswers () {
+    public List <Answers> getListofAnswers () {
         return listofAnswers;
     }
 
@@ -60,7 +60,7 @@ public class User {
         this.listofAnswers = listofAnswers;
     }
 
-    public String getUid() {
+    public String getUid () {
         return uid;
     }
 

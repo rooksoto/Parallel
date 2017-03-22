@@ -28,7 +28,7 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class FragmentChat extends Fragment implements FragmentChatPresenter.Listener{
+public class FragmentChat extends Fragment implements FragmentChatPresenter.Listener {
 
     private ProgressBar progressBar;
     private EditText messageEditText;
@@ -41,7 +41,7 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
     private FirebaseUser firebaseUser;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate (@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fragmentChatPresenter = new FragmentChatPresenter(this);
         fragmentChatPresenter.onCreate();
@@ -50,7 +50,7 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView (LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hub_chatroom, container, false);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         messageEditText = (EditText) view.findViewById(R.id.fragment_hub_chatroom_edittext_message);
@@ -61,7 +61,7 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated (View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 //        int position = FragmentPagerItem.getPosition(getArguments());
         fragmentChatPresenter.onViewCreated();
@@ -70,22 +70,22 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
         setOnEditorActionListeners();
     }
 
-    private void setOnCickListeners(){
+    private void setOnCickListeners () {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick (View view) {
                 fragmentChatPresenter.onSendButtonClick(messageEditText.getText().toString());
                 messageEditText.setText("");
             }
         });
     }
 
-    private void setOnEditorActionListeners(){
+    private void setOnEditorActionListeners () {
         messageEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction (TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
-                if (actionId == EditorInfo.IME_ACTION_SEND){
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
                     fragmentChatPresenter.onSendButtonClick(messageEditText.getText().toString());
                     messageEditText.setText("");
                     handled = false;
@@ -95,14 +95,14 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
         });
     }
 
-    private void setupTextChangedListenerForMessage() {
+    private void setupTextChangedListenerForMessage () {
         messageEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void beforeTextChanged (CharSequence charSequence, int i, int i1, int i2) {
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onTextChanged (CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.toString().trim().length() == 0) {
                     sendButton.setEnabled(false);
                 } else {
@@ -111,37 +111,37 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
+            public void afterTextChanged (Editable editable) {
 
             }
         });
     }
 
     @Override
-    public void onStart() {
+    public void onStart () {
         super.onStart();
         fragmentChatPresenter.onStart();
 
     }
 
     @Override
-    public void onStop() {
+    public void onStop () {
         super.onStop();
         fragmentChatPresenter.onStop();
     }
 
     @Override
-    public void onDestroy() {
+    public void onDestroy () {
         super.onDestroy();
         fragmentChatPresenter.onDestroy();
     }
 
 
     @Override
-    public FirebaseListAdapter<ChatMessage> createFirebaseListAdapter(DatabaseReference ref) {
-        final FirebaseListAdapter<ChatMessage> messageListAdapter = new FirebaseListAdapter<ChatMessage>(getActivity(), ChatMessage.class, R.layout.chat_message, ref) {
+    public FirebaseListAdapter <ChatMessage> createFirebaseListAdapter (DatabaseReference ref) {
+        final FirebaseListAdapter <ChatMessage> messageListAdapter = new FirebaseListAdapter <ChatMessage>(getActivity(), ChatMessage.class, R.layout.chat_message, ref) {
             @Override
-            protected void populateView(View view, ChatMessage chatMessage, int position) {
+            protected void populateView (View view, ChatMessage chatMessage, int position) {
                 progressBar.setVisibility(View.INVISIBLE);
                 picImageViewLeft = (CircleImageView) view.findViewById(R.id.picImageViewLeft);
 //                picImageViewRight = (CircleImageView) view.findViewById(R.id.picImageViewRight);
@@ -154,7 +154,7 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
                 }
                 TextView textViewMessage = (TextView) view.findViewById(R.id.messageTextView);
                 textViewMessage.setText(chatMessage.getText());
-                TextView textViewName = (TextView)  view.findViewById(R.id.nameTextView);
+                TextView textViewName = (TextView) view.findViewById(R.id.nameTextView);
                 textViewName.setText(chatMessage.getName());
 //                if (firebaseUser.getDisplayName().equals(chatMessage.getName())){
 //                    picImageViewLeft.setVisibility(View.INVISIBLE);

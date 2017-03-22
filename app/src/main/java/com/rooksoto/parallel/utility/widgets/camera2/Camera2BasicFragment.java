@@ -87,6 +87,8 @@ import java.util.concurrent.TimeUnit;
 public class Camera2BasicFragment extends Fragment
         implements View.OnClickListener, FragmentCompat.OnRequestPermissionsResultCallback {
 
+    public static final String CAMERA_FRONT_ID = "1";
+    public static final String CAMERA_BACK_ID = "0";
     /**
      * Conversion from screen rotation to JPEG orientation.
      */
@@ -191,13 +193,13 @@ public class Camera2BasicFragment extends Fragment
         from onActivityCreated and add here with the new path from my Album*/
 
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
-            mFile = new File(mediaStorageDir,"ImageName"+"_"+ timeStamp+".jpeg");
+            mFile = new File(mediaStorageDir, "ImageName" + "_" + timeStamp + ".jpeg");
 
             //Then the contentValues
             ContentValues values = new ContentValues();
             values.put(MediaStore.Images.Media.TITLE, "ImageName");
             values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
-            values.put(MediaStore.Images.Media.MIME_TYPE,"image/jpeg");
+            values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
             values.put("_data", mFile.getAbsolutePath());
             ContentResolver cr = getActivity().getContentResolver();
             cr.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
@@ -338,6 +340,9 @@ public class Camera2BasicFragment extends Fragment
         }
 
     };
+    private boolean noExternalPermission = false;
+    private ImageButton imageButtonExit;
+    private String myCameraId = CAMERA_BACK_ID;
     /**
      * {@link TextureView.SurfaceTextureListener} handles several lifecycle events on a
      * {@link TextureView}.
@@ -365,8 +370,6 @@ public class Camera2BasicFragment extends Fragment
         }
 
     };
-    private boolean noExternalPermission = false;
-    private ImageButton imageButtonExit;
 
     /**
      * Given {@code choices} of {@code Size}s supported by a camera, choose the smallest one that
@@ -502,7 +505,6 @@ public class Camera2BasicFragment extends Fragment
         }
     }
 
-
     @Override
     public void onRequestPermissionsResult (int requestCode, @NonNull String[] permissions,
                                             @NonNull int[] grantResults) {
@@ -526,11 +528,6 @@ public class Camera2BasicFragment extends Fragment
             }
         }
     }
-
-    public static final String CAMERA_FRONT_ID = "1";
-    public static final String CAMERA_BACK_ID = "0";
-
-    private String myCameraId = CAMERA_BACK_ID;
 
     /**
      * Sets up member variables related to camera.
@@ -948,7 +945,7 @@ public class Camera2BasicFragment extends Fragment
     public void onClick (View view) {
         switch (view.getId()) {
             case R.id.picture: {
-                if (myCameraId.equals(CAMERA_FRONT_ID)){
+                if (myCameraId.equals(CAMERA_FRONT_ID)) {
                     captureStillPicture();
                 } else if (myCameraId.equals(CAMERA_BACK_ID)) {
                     takePicture();
@@ -962,7 +959,7 @@ public class Camera2BasicFragment extends Fragment
         }
     }
 
-    private void switchCamera() {
+    private void switchCamera () {
         if (myCameraId.equals(CAMERA_FRONT_ID)) {
             myCameraId = CAMERA_BACK_ID;
             closeCamera();
@@ -975,7 +972,7 @@ public class Camera2BasicFragment extends Fragment
         }
     }
 
-    private void reopenCamera() {
+    private void reopenCamera () {
         if (mTextureView.isAvailable()) {
             openCamera(mTextureView.getWidth(), mTextureView.getHeight());
         } else {

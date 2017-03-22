@@ -58,10 +58,10 @@ public class ActivityLogin extends AppCompatActivity implements BaseView {
     @Override
     public void onBackPressed () {
         Fragment currentFrag = getFragmentManager().findFragmentById(containerID);
-        if (currentFrag instanceof FragmentLoginWait || currentFrag instanceof FragmentLoginSplash){
+        if (currentFrag instanceof FragmentLoginWait || currentFrag instanceof FragmentLoginSplash) {
             CustomAlertDialog customAlertDialog = new CustomAlertDialog();
             customAlertDialog.exit(this);
-        } else if (currentFrag instanceof FragmentLoginLogin){
+        } else if (currentFrag instanceof FragmentLoginLogin) {
             getFragmentManager().beginTransaction().replace(containerID, new FragmentLoginSplash()).commit();
         } else {
             super.onBackPressed();

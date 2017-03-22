@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.utility.widgets.recyclerview;
+package com.rooksoto.parallel.utility.widgets.recyclerview.attendeesandevents;
 
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -25,9 +25,9 @@ class EventAttendeesViewholder extends RecyclerView.ViewHolder {
     private TextView textViewName;
     private TextView textViewEmail;
     private ImageView imageViewProfile;
-    private List<Answers> answersList;
+    private List <Answers> answersList;
 
-    public EventAttendeesViewholder(View itemView) {
+    public EventAttendeesViewholder (View itemView) {
         super(itemView);
         view = itemView;
         textViewName = (TextView) itemView.findViewById(R.id.fragment_hub_attendees_viewholder_name);
@@ -36,7 +36,7 @@ class EventAttendeesViewholder extends RecyclerView.ViewHolder {
         eventMapPresenter = FragmentEventMapPresenter.getInstance(null);
     }
 
-    public void bind(final User userParam) {
+    public void bind (final User userParam) {
         textViewName.setText("" + userParam.getName());
         if (userParam.getPictureLink() == null) {
             Picasso.with(AppContext.getAppContext()).load(R.drawable.bruttino_large).fit().into(imageViewProfile);
@@ -45,7 +45,7 @@ class EventAttendeesViewholder extends RecyclerView.ViewHolder {
         }
         view.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick (View view) {
                 eventMapPresenter.onUserSelected(userParam.getUid());
             }
         });

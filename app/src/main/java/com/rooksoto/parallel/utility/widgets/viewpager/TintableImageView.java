@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.utility.widgets.hubviewpager;
+package com.rooksoto.parallel.utility.widgets.viewpager;
 
 import android.content.Context;
 import android.content.res.ColorStateList;

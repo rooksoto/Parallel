@@ -1,4 +1,3 @@
-
 package com.rooksoto.parallel.model;
 
 import com.google.gson.annotations.Expose;
@@ -8,15 +7,15 @@ import java.util.List;
 
 public class AttendeeList {
 
-    @SerializedName("attendee_id")
+    @SerializedName ("attendee_id")
     @Expose
-    private List<AttendeeId> attendeeIds;
+    private List <AttendeeId> attendeeIds;
 
-    public List<AttendeeId> getAttendeeIds() {
+    public List <AttendeeId> getAttendeeIds () {
         return attendeeIds;
     }
 
-    public void setAttendeeIds(List<AttendeeId> attendeeIds) {
+    public void setAttendeeIds (List <AttendeeId> attendeeIds) {
         this.attendeeIds = attendeeIds;
     }
 }

@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.utility.widgets.recyclerview.ExpandedRecyclerView;
+package com.rooksoto.parallel.utility.widgets.recyclerview.attendeesExpandedRecyclerView;
 
 import com.bignerdranch.expandablerecyclerview.model.Parent;
 import com.rooksoto.parallel.objects.Answers;
@@ -6,12 +6,12 @@ import com.rooksoto.parallel.objects.Answers;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserExtend implements Parent<Answers> {
+public class UserExtend implements Parent <Answers> {
     String name;
     String email;
     String pictureLink;
     String uid;
-    List<Answers> listofAnswers = new ArrayList<>();
+    List <Answers> listofAnswers = new ArrayList <>();
 
     public UserExtend (String name, String email, String pictureLink, String uid, List <Answers> listofAnswers) {
         this.name = name;
@@ -34,7 +34,7 @@ public class UserExtend implements Parent<Answers> {
     }
 
     @Override
-    public List<Answers> getChildList () {
+    public List <Answers> getChildList () {
         return listofAnswers;
     }
 

@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 
-public class FragmentLoginWaitPageFuture extends Fragment implements BaseView{
+public class FragmentLoginWaitPageFuture extends Fragment implements BaseView {
     private View mView;
 
     @Nullable

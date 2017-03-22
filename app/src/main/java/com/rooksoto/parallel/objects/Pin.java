@@ -10,16 +10,16 @@ public class Pin {
     private PointF coordinates;
     private String uid;
 
-    public Pin(String uid, PointF coordinates) {
+    public Pin (String uid, PointF coordinates) {
         this.uid = uid;
         this.coordinates = coordinates;
     }
 
-    public PointF getCoordinates() {
+    public PointF getCoordinates () {
         return coordinates;
     }
 
-    public String getUid() {
+    public String getUid () {
         return uid;
     }
 }

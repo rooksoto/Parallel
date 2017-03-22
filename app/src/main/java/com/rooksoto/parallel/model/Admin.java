@@ -1,4 +1,3 @@
-
 package com.rooksoto.parallel.model;
 
 import com.google.gson.annotations.Expose;
@@ -6,26 +5,26 @@ import com.google.gson.annotations.SerializedName;
 
 public class Admin {
 
-    @SerializedName("authenticated")
+    @SerializedName ("authenticated")
     @Expose
     private Boolean authenticated;
-    @SerializedName("admin_name")
+    @SerializedName ("admin_name")
     @Expose
     private String adminName;
 
-    public Boolean getAuthenticated() {
+    public Boolean getAuthenticated () {
         return authenticated;
     }
 
-    public void setAuthenticated(Boolean authenticated) {
+    public void setAuthenticated (Boolean authenticated) {
         this.authenticated = authenticated;
     }
 
-    public String getAdminName() {
+    public String getAdminName () {
         return adminName;
     }
 
-    public void setAdminName(String adminName) {
+    public void setAdminName (String adminName) {
         this.adminName = adminName;
     }
 }

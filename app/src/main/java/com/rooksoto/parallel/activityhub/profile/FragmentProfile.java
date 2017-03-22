@@ -25,33 +25,28 @@ import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.objects.Answers;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
-import com.rooksoto.parallel.utility.widgets.recyclerview.ProfileAdapter;
+import com.rooksoto.parallel.utility.widgets.recyclerview.profile.ProfileAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentProfile extends Fragment implements BaseView {
+    private static final String TAG = "FragmentProfile";
+    List <Answers> listofAnswers = new ArrayList <>();
+    ProfileAdapter profileAdapter;
     private FragmentProfilePresenter fragmentProfilePresenter;
     private RecyclerView recyclerViewProfile;
-    List<Answers> listofAnswers = new ArrayList<>();
-
     private FirebaseUser user;
-
     private View view;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase database;
     private DatabaseReference reference;
     private DatabaseReference answerRef;
-
-    ProfileAdapter profileAdapter;
-
     private ImageView ivProfilePic;
     private TextView tvName;
     private TextView tvEmail;
     private ImageButton imageButtonLogOut;
-
-    private static final String TAG = "FragmentProfile";
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,7 +57,7 @@ public class FragmentProfile extends Fragment implements BaseView {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated (View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
@@ -79,8 +74,8 @@ public class FragmentProfile extends Fragment implements BaseView {
 
         answerRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot question:dataSnapshot.getChildren()) {
+            public void onDataChange (DataSnapshot dataSnapshot) {
+                for (DataSnapshot question : dataSnapshot.getChildren()) {
                     listofAnswers.add(new Answers(
                             (String) question.child("question").getValue(),
                             (String) question.child("answer").getValue()
@@ -90,7 +85,7 @@ public class FragmentProfile extends Fragment implements BaseView {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled (DatabaseError databaseError) {
                 Log.d(TAG, "onCancelled: Failed to get list of answers from dataSnapshot");
             }
         });
@@ -115,7 +110,7 @@ public class FragmentProfile extends Fragment implements BaseView {
         recyclerViewProfile.setAdapter(profileAdapter);
     }
 
-    private void setOnClickListeners(){
+    private void setOnClickListeners () {
         imageButtonLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {

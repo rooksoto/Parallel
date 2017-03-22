@@ -13,25 +13,25 @@ import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 
 class FragmentChatPresenter {
 
-    private static final String TAG = FragmentChatPresenter.class.getClass().toString();
     public static final String CHATIDS = "chatids";
+    private static final String TAG = FragmentChatPresenter.class.getClass().toString();
     private Listener listener;
     private String userName;
     private String profilePic;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private DatabaseReference ref;
-    private FirebaseListAdapter<ChatMessage> messageListAdapter;
+    private FirebaseListAdapter <ChatMessage> messageListAdapter;
 
-    public FragmentChatPresenter(Listener listener) {
+    public FragmentChatPresenter (Listener listener) {
         this.listener = listener;
     }
 
-    void onCreate() {
+    void onCreate () {
         firebaseAuth = FirebaseAuth.getInstance();
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            public void onAuthStateChanged (@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
@@ -48,29 +48,29 @@ class FragmentChatPresenter {
 
     }
 
-    void onViewCreated() {
+    void onViewCreated () {
         messageListAdapter = listener.createFirebaseListAdapter(ref);
     }
 
-    void onSendButtonClick(String message) {
+    void onSendButtonClick (String message) {
         ref.push().setValue(new ChatMessage(userName, message, profilePic));
     }
 
-    void onStart() {
+    void onStart () {
         firebaseAuth.addAuthStateListener(authStateListener);
     }
 
-    void onStop() {
+    void onStop () {
         if (authStateListener != null) {
             firebaseAuth.removeAuthStateListener(authStateListener);
         }
     }
 
-    void onDestroy() {
+    void onDestroy () {
         messageListAdapter.cleanup();
     }
 
-    void setChatroomReference(String chatId) {
+    void setChatroomReference (String chatId) {
         ref = FirebaseDatabase.getInstance().getReference()
                 .child(ParallelLocation.eventID)
                 .child("room_list")
@@ -80,7 +80,7 @@ class FragmentChatPresenter {
 
     interface Listener {
 
-        FirebaseListAdapter<ChatMessage> createFirebaseListAdapter(DatabaseReference ref);
+        FirebaseListAdapter <ChatMessage> createFirebaseListAdapter (DatabaseReference ref);
 
     }
 

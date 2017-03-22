@@ -9,21 +9,21 @@ public class ActivityHubPresenter {
     private Listener listener;
     private View view;
 
-    public ActivityHubPresenter(Listener listener) {
+    public ActivityHubPresenter (Listener listener) {
         this.listener = listener;
     }
 
-    public void onInitialize() {
+    public void onInitialize () {
         locationService.connect();
         listener.checkLocationServices(locationService);
     }
 
 
-    public void onStop() {
+    public void onStop () {
         listener.disconnectLocationService(locationService);
     }
 
-    public void toViewPager(){
+    public void toViewPager () {
         listener.setupViewpager();
     }
 
@@ -40,15 +40,15 @@ public class ActivityHubPresenter {
     }
 
     public interface Listener {
-        void setupViewpager();
+        void setupViewpager ();
 
-        void checkLocationServices(ParallelLocation locationService);
+        void checkLocationServices (ParallelLocation locationService);
 
-        void disconnectLocationService(ParallelLocation locationService);
+        void disconnectLocationService (ParallelLocation locationService);
 
-        void activateParallelEvent(String enteredEventID);
+        void activateParallelEvent (String enteredEventID);
 
-        void showEventIdError(String enteredEventID);
+        void showEventIdError (String enteredEventID);
 
     }
 

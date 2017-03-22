@@ -21,7 +21,7 @@ public class FragmentHubQuestionsPresenter implements BasePresenter {
     private List <Questions> listofQuestions = new ArrayList <>();
     private List <Answers> listofAnswers = new ArrayList <>();
 
-    public FragmentHubQuestionsPresenter(ActivityHubPresenter.Listener listener){
+    public FragmentHubQuestionsPresenter (ActivityHubPresenter.Listener listener) {
         this.listener = listener;
     }
 
@@ -34,7 +34,7 @@ public class FragmentHubQuestionsPresenter implements BasePresenter {
         customAlertDialog.exit((Activity) viewP.getContext());
     }
 
-    public void setTempList() {
+    public void setTempList () {
         listofQuestions.add(new Questions("Please answer the next few questions:"));
 
         listofQuestions.add(new Questions("Are you an IOS or Android developer?", R.drawable.ic_appleicon, R.drawable.ic_androidicon));
@@ -47,7 +47,7 @@ public class FragmentHubQuestionsPresenter implements BasePresenter {
     public void setOnClickReplace (Fragment fragmentP, View viewP, int containerID, String id) {
     }
 
-    public void toViewPager(){
+    public void toViewPager () {
         listener.setupViewpager();
     }
 
@@ -56,13 +56,13 @@ public class FragmentHubQuestionsPresenter implements BasePresenter {
         //User newUser = new User();
     }
 
-    public List<Questions> getQuestions() {
+    public List <Questions> getQuestions () {
         getQuestionsfromFirebase();
         setTempList();
         return listofQuestions;
     }
 
-    public void getQuestionsfromFirebase() {
+    public void getQuestionsfromFirebase () {
         // // TODO: 3/14/2017 get List of Questions from Firebase
     }
 }

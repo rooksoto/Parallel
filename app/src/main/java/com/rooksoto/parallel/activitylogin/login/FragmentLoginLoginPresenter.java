@@ -24,15 +24,15 @@ class FragmentLoginLoginPresenter {
     private FirebaseAuth.AuthStateListener authListener;
     private GoogleApiClient googleApiClient;
 
-    FragmentLoginLoginPresenter(Listener listener) {
+    FragmentLoginLoginPresenter (Listener listener) {
         this.listener = listener;
     }
 
-    void onCreate() {
+    void onCreate () {
         firebaseAuth = FirebaseAuth.getInstance();
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            public void onAuthStateChanged (@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
@@ -44,7 +44,7 @@ class FragmentLoginLoginPresenter {
         };
     }
 
-    void returnFromCreateAccount() {
+    void returnFromCreateAccount () {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(CLIENTID)
                 .requestEmail()
@@ -53,22 +53,22 @@ class FragmentLoginLoginPresenter {
         googleApiClient = listener.buildGoogleApiClient(gso);
     }
 
-    public void OnSignInClicked() {
+    public void OnSignInClicked () {
         listener.sendResultToActivity(googleApiClient);
     }
 
-    public void onStart() {
+    public void onStart () {
         listener.addAuthStateListener(firebaseAuth, authListener);
     }
 
-    public void onStop() {
+    public void onStop () {
         if (authListener != null) {
             listener.removeAuthStateListener(firebaseAuth, authListener);
         }
 
     }
 
-    public void handleSignInResult(GoogleSignInResult result) {
+    public void handleSignInResult (GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
             GoogleSignInAccount acct = result.getSignInAccount();
@@ -78,30 +78,30 @@ class FragmentLoginLoginPresenter {
         }
     }
 
-    public void onGeneralLoginClicked(String id) {
+    public void onGeneralLoginClicked (String id) {
         listener.startFragmentReplacement(id);
     }
 
-    public void onDestroy() {
+    public void onDestroy () {
         listener.demolishGoogleClient(googleApiClient);
     }
 
 
     interface Listener {
-        void startActivityAfterAuthenticated();
+        void startActivityAfterAuthenticated ();
 
-        void sendResultToActivity(GoogleApiClient googleApiClient);
+        void sendResultToActivity (GoogleApiClient googleApiClient);
 
-        GoogleApiClient buildGoogleApiClient(GoogleSignInOptions gso);
+        GoogleApiClient buildGoogleApiClient (GoogleSignInOptions gso);
 
-        void addAuthStateListener(FirebaseAuth firebaseAuth, FirebaseAuth.AuthStateListener authListener);
+        void addAuthStateListener (FirebaseAuth firebaseAuth, FirebaseAuth.AuthStateListener authListener);
 
-        void removeAuthStateListener(FirebaseAuth firebaseAuth, FirebaseAuth.AuthStateListener authListener);
+        void removeAuthStateListener (FirebaseAuth firebaseAuth, FirebaseAuth.AuthStateListener authListener);
 
-        void firebaseAuthWithGoogle(GoogleSignInAccount acct, FirebaseAuth firebaseAuth);
+        void firebaseAuthWithGoogle (GoogleSignInAccount acct, FirebaseAuth firebaseAuth);
 
-        void startFragmentReplacement(String id);
+        void startFragmentReplacement (String id);
 
-        void demolishGoogleClient(GoogleApiClient googleApiClient);
+        void demolishGoogleClient (GoogleApiClient googleApiClient);
     }
 }

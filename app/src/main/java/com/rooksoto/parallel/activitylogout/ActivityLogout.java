@@ -12,13 +12,13 @@ import com.rooksoto.parallel.R;
  * Created by rook on 3/16/17.
  */
 
-public class ActivityLogout extends AppCompatActivity{
+public class ActivityLogout extends AppCompatActivity {
 
     TextView tvLogoutText;
     TextView tvLogoutTimer;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate (@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logout);
 
@@ -28,15 +28,15 @@ public class ActivityLogout extends AppCompatActivity{
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume () {
         super.onResume();
         startCountDownTimer();
     }
 
-    private void startCountDownTimer() {
+    private void startCountDownTimer () {
         new CountDownTimer(300000, 1000) {
 
-            public void onTick(long millisUntilFinished) {
+            public void onTick (long millisUntilFinished) {
                 tvLogoutTimer.setText("seconds remaining: " + millisUntilFinished / 1000);
                 tvLogoutTimer.setText("" +
                         millisUntilFinished / 60 +
@@ -46,7 +46,7 @@ public class ActivityLogout extends AppCompatActivity{
                         "s");
             }
 
-            public void onFinish() {
+            public void onFinish () {
                 tvLogoutTimer.setText("Exiting...");
                 finishAffinity();
             }

@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.utility.widgets.recyclerview;
+package com.rooksoto.parallel.utility.widgets.recyclerview.profile;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -22,9 +22,9 @@ public class ProfileViewholder extends RecyclerView.ViewHolder {
 
     public void bind (int position, Answers answerP) {
         textViewQuestion.setText("" + answerP.getQuestion());
-        if (answerP.getAnswer().equals("True")){
+        if (answerP.getAnswer().equals("True")) {
             imageViewLeft.setVisibility(View.INVISIBLE);
-        } else if (answerP.getAnswer().equals("False")){
+        } else if (answerP.getAnswer().equals("False")) {
             imageViewRight.setVisibility(View.INVISIBLE);
         } else if (answerP.getAnswer().equals("2130837628")) { // Selected Android
             imageViewLeft.setVisibility(View.INVISIBLE);

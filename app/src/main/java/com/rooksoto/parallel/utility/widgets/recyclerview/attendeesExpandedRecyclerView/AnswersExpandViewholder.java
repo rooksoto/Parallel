@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.utility.widgets.recyclerview.ExpandedRecyclerView;
+package com.rooksoto.parallel.utility.widgets.recyclerview.attendeesExpandedRecyclerView;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -22,9 +22,9 @@ public class AnswersExpandViewholder extends ChildViewHolder {
 
     public void bind (Answers child) {
         textViewQuestion.setText(child.getQuestion());
-        if (child.getAnswer().equals("True")){
+        if (child.getAnswer().equals("True")) {
             imageViewLeft.setVisibility(View.INVISIBLE);
-        } else if (child.getAnswer().equals("False")){
+        } else if (child.getAnswer().equals("False")) {
             imageViewRight.setVisibility(View.INVISIBLE);
         } else if (child.getAnswer().equals("2130837625")) { // Selected Android
             imageViewLeft.setVisibility(View.INVISIBLE);

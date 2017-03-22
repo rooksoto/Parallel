@@ -1,4 +1,3 @@
-
 package com.rooksoto.parallel.model;
 
 import com.google.gson.annotations.Expose;
@@ -6,37 +5,37 @@ import com.google.gson.annotations.SerializedName;
 
 public class EventLocation {
 
-    @SerializedName("latitude")
+    @SerializedName ("latitude")
     @Expose
     private Double latitude;
-    @SerializedName("longitude")
+    @SerializedName ("longitude")
     @Expose
     private Double longitude;
-    @SerializedName("radius_meters")
+    @SerializedName ("radius_meters")
     @Expose
     private Float radiusMeters;
 
-    public Double getLatitude() {
+    public Double getLatitude () {
         return latitude;
     }
 
-    public void setLatitude(Double latitude) {
+    public void setLatitude (Double latitude) {
         this.latitude = latitude;
     }
 
-    public Double getLongitude() {
+    public Double getLongitude () {
         return longitude;
     }
 
-    public void setLongitude(Double longitude) {
+    public void setLongitude (Double longitude) {
         this.longitude = longitude;
     }
 
-    public Float getRadiusMeters() {
+    public Float getRadiusMeters () {
         return radiusMeters;
     }
 
-    public void setRadiusMeters(Float radiusMeters) {
+    public void setRadiusMeters (Float radiusMeters) {
         this.radiusMeters = radiusMeters;
     }
 }

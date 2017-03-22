@@ -24,6 +24,12 @@ public class CustomFirebaseMessagingService extends com.google.firebase.messagin
 
     private static final String TAG = "MyFirebaseMsgService";
     private static View view;
+
+    public static void giveView (View viewP) {
+        view = viewP;
+    }
+    // [END receive_message]
+
     /**
      * Called when message is received.
      *
@@ -31,7 +37,7 @@ public class CustomFirebaseMessagingService extends com.google.firebase.messagin
      */
     // [START receive_message]
     @Override
-    public void onMessageReceived(RemoteMessage remoteMessage) {
+    public void onMessageReceived (RemoteMessage remoteMessage) {
         // [START_EXCLUDE]
         // There are two types of messages data messages and notification messages. Data messages are handled
         // here in onMessageReceived whether the app is in the foreground or background. Data messages are the type
@@ -61,14 +67,13 @@ public class CustomFirebaseMessagingService extends com.google.firebase.messagin
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
     }
-    // [END receive_message]
 
     /**
      * Create and show a simple notification containing the received FCM message.
      *
      * @param messageBody FCM message body received.
      */
-    private void sendNotification(String messageBody) {
+    private void sendNotification (String messageBody) {
         DateFormat df = new SimpleDateFormat("h:mm a");
         String time = df.format(Calendar.getInstance().getTime());
 
@@ -82,7 +87,7 @@ public class CustomFirebaseMessagingService extends com.google.firebase.messagin
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
-        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_stat_ic_notification)
                 .setContentTitle("Parallel")
@@ -98,9 +103,5 @@ public class CustomFirebaseMessagingService extends com.google.firebase.messagin
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
-    }
-
-    public static void giveView(View viewP){
-        view = viewP;
     }
 }

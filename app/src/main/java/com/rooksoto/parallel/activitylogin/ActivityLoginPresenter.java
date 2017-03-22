@@ -14,11 +14,11 @@ import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.CustomToast;
 
 public class ActivityLoginPresenter implements BasePresenter {
+    public static boolean logoVisible = false;
     private Activity activity;
     private int containerID = R.id.activity_login_fragment_container;
     private CustomAlertDialog mCustomAlertDialog = new CustomAlertDialog();
     private CustomToast mCustomToast = new CustomToast();
-    public static boolean logoVisible = false;
     private FragmentLoginLogin mFragmentLoginLogin;
     private boolean isNew = true;
 

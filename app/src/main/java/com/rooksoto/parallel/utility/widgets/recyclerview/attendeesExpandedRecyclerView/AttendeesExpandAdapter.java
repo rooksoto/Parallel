@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.utility.widgets.recyclerview.ExpandedRecyclerView;
+package com.rooksoto.parallel.utility.widgets.recyclerview.attendeesExpandedRecyclerView;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -12,9 +12,10 @@ import com.rooksoto.parallel.objects.Answers;
 
 import java.util.List;
 
-public class AttendeesExpandAdapter extends ExpandableRecyclerAdapter<UserExtend, Answers, AttendeesExpandViewholder, AnswersExpandViewholder> {
+public class AttendeesExpandAdapter extends ExpandableRecyclerAdapter <UserExtend, Answers, AttendeesExpandViewholder, AnswersExpandViewholder> {
     private LayoutInflater layoutInflater;
-    private List<UserExtend> listofUserExtend;
+    private List <UserExtend> listofUserExtend;
+
     /**
      * Primary constructor. Sets up {@link #mParentList} and {@link #mFlatItemList}.
      * <p>
@@ -31,7 +32,7 @@ public class AttendeesExpandAdapter extends ExpandableRecyclerAdapter<UserExtend
      * @param parentList List of all parents to be displayed in the RecyclerView that this
      *                   adapter is linked to
      */
-    public AttendeesExpandAdapter (Context contextP, @NonNull List<UserExtend> parentList) {
+    public AttendeesExpandAdapter (Context contextP, @NonNull List <UserExtend> parentList) {
         super(parentList);
         this.listofUserExtend = parentList;
         layoutInflater = LayoutInflater.from(contextP);

@@ -12,12 +12,12 @@ import android.view.ViewGroup;
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.objects.Events;
-import com.rooksoto.parallel.utility.widgets.recyclerview.EventsAdapter;
+import com.rooksoto.parallel.utility.widgets.recyclerview.attendeesandevents.EventsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentLoginWaitPageCurrent extends Fragment implements BaseView{
+public class FragmentLoginWaitPageCurrent extends Fragment implements BaseView {
     private View mView;
     private RecyclerView mRecyclerView;
 

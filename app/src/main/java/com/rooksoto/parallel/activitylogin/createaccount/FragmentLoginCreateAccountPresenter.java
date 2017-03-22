@@ -26,9 +26,9 @@ public class FragmentLoginCreateAccountPresenter implements BasePresenter {
 
     public void createNewAccount (String email, final String username, String password) {
         // TODO: 3/8/17 Creates new Account
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener <AuthResult>() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+            public void onComplete (@NonNull Task <AuthResult> task) {
                 if (task.isSuccessful()) {
                     // create account successful
                     String userId = auth.getCurrentUser().getUid();

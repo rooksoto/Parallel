@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.utility.widgets.recyclerview.ExpandedRecyclerView;
+package com.rooksoto.parallel.utility.widgets.recyclerview.attendeesExpandedRecyclerView;
 
 import android.annotation.SuppressLint;
 import android.net.Uri;
@@ -22,18 +22,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AttendeesExpandViewholder extends ParentViewHolder {
+    private static final float INITIAL_POSITION = 0.0f;
+    private static final float ROTATED_POSITION = 180f;
     private TextView textViewName;
     private TextView textViewEmail;
     private ImageView imageViewProfile;
-    private List<Answers> listofAnswers = new ArrayList<>();
+    private List <Answers> listofAnswers = new ArrayList <>();
     private User user;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase database;
     private DatabaseReference reference;
     private DatabaseReference answerRef;
-
-    private static final float INITIAL_POSITION = 0.0f;
-    private static final float ROTATED_POSITION = 180f;
 
     public AttendeesExpandViewholder (View itemView) {
         super(itemView);
@@ -55,7 +54,7 @@ public class AttendeesExpandViewholder extends ParentViewHolder {
 
     @SuppressLint ("NewApi")
     @Override
-    public void setExpanded(boolean expanded) {
+    public void setExpanded (boolean expanded) {
         super.setExpanded(expanded);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             if (expanded) {
@@ -65,7 +64,7 @@ public class AttendeesExpandViewholder extends ParentViewHolder {
     }
 
     @Override
-    public void onExpansionToggled(boolean expanded) {
+    public void onExpansionToggled (boolean expanded) {
         super.onExpansionToggled(expanded);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             RotateAnimation rotateAnimation;

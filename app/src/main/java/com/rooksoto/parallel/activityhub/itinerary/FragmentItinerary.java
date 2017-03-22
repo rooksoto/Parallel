@@ -20,26 +20,21 @@ import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.objects.Session;
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
-import com.rooksoto.parallel.utility.widgets.recyclerview.ItineraryAdapter;
+import com.rooksoto.parallel.utility.widgets.recyclerview.itinerary.ItineraryAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentItinerary extends Fragment implements BaseView {
+    private static final String TAG = "FragmentItinerary";
     private FragmentItineraryPresenter fragmentItineraryPresenter = new FragmentItineraryPresenter();
-    private List<Session> listofSessions = new ArrayList <>();
-
+    private List <Session> listofSessions = new ArrayList <>();
     private View view;
     private RecyclerView recyclerViewItinerary;
     private ImageButton imageButtonExit;
-
     private ItineraryAdapter itineraryAdapter;
-
     private FirebaseDatabase database;
     private DatabaseReference itineraryRef;
-
-    private static final String TAG = "FragmentItinerary";
-
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,15 +45,15 @@ public class FragmentItinerary extends Fragment implements BaseView {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated (View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         database = FirebaseDatabase.getInstance();
         itineraryRef = database.getReference().child(ParallelLocation.eventID).child("itinerary");
 
         itineraryRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot item:dataSnapshot.getChildren()) {
+            public void onDataChange (DataSnapshot dataSnapshot) {
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
                     listofSessions.add(new Session(
                             (String) item.child("name").getValue(),
                             (String) item.child("location").getValue(),
@@ -69,7 +64,7 @@ public class FragmentItinerary extends Fragment implements BaseView {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled (DatabaseError databaseError) {
                 Log.d(TAG, "onCancelled: Error reading itinerary data");
             }
         });
@@ -80,8 +75,6 @@ public class FragmentItinerary extends Fragment implements BaseView {
     }
 
 
-
-
     @Override
     public void setViews () {
         itineraryAdapter = new ItineraryAdapter(listofSessions);
@@ -90,7 +83,7 @@ public class FragmentItinerary extends Fragment implements BaseView {
         recyclerViewItinerary.setAdapter(itineraryAdapter);
     }
 
-    private void tempRV(){
+    private void tempRV () {
 //        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
 //        Date date = new Date();
 //        dateFormat.format(date);

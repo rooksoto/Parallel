@@ -9,14 +9,14 @@ public class Session {
     String startTime;
     Date endTime;
 
-    public Session(String nameP, String locationP, String startTimeP, Date endTimeP){
+    public Session (String nameP, String locationP, String startTimeP, Date endTimeP) {
         this.name = nameP;
         this.location = locationP;
         this.startTime = startTimeP;
         this.endTime = endTimeP;
     }
 
-    public Session(String name, String location, String startTime) {
+    public Session (String name, String location, String startTime) {
         this.name = name;
         this.location = location;
         this.startTime = startTime;

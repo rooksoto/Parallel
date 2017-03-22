@@ -11,12 +11,12 @@ public class FixedViewPager extends ViewPager {
         super(context);
     }
 
-    public FixedViewPager(Context context, AttributeSet attrs) {
+    public FixedViewPager (Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent ev) {
+    public boolean onTouchEvent (MotionEvent ev) {
         try {
             return super.onTouchEvent(ev);
         } catch (IllegalArgumentException ex) {
@@ -26,7 +26,7 @@ public class FixedViewPager extends ViewPager {
     }
 
     @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
+    public boolean onInterceptTouchEvent (MotionEvent ev) {
         try {
             return super.onInterceptTouchEvent(ev);
         } catch (IllegalArgumentException ex) {

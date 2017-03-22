@@ -18,18 +18,18 @@ public class GeofenceService extends IntentService {
 
     private static final String TAG = "GeofenceService";
 
-    public GeofenceService() {
+    public GeofenceService () {
         super(TAG);
     }
 
     @Override
-    protected void onHandleIntent(Intent intent) {
+    protected void onHandleIntent (Intent intent) {
         GeofencingEvent event = GeofencingEvent.fromIntent(intent);
         if (event.hasError()) {
             Log.d(TAG, "onHandleIntent: There was an error getting geofence transition event.");
         } else {
             int transition = event.getGeofenceTransition();
-            List<Geofence> geofences = event.getTriggeringGeofences();
+            List <Geofence> geofences = event.getTriggeringGeofences();
             Geofence geofence = geofences.get(0);
             String requestID = geofence.getRequestId();
 
@@ -43,13 +43,13 @@ public class GeofenceService extends IntentService {
         }
     }
 
-    private void sendEntranceMessage() {
+    private void sendEntranceMessage () {
         Intent entryIntent = new Intent("geofence_entry");
         entryIntent.putExtra("message", "Successfully Entered");
         LocalBroadcastManager.getInstance(this).sendBroadcast(entryIntent);
     }
 
-    private void sendExitMessage() {
+    private void sendExitMessage () {
         Intent exitIntent = new Intent("geofence_exit");
         exitIntent.putExtra("message", "Successfully Exited");
         LocalBroadcastManager.getInstance(this).sendBroadcast(exitIntent);

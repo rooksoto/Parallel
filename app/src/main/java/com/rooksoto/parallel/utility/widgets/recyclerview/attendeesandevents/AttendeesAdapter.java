@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.utility.widgets.recyclerview;
+package com.rooksoto.parallel.utility.widgets.recyclerview.attendeesandevents;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,16 +13,16 @@ import java.util.List;
 
 public class AttendeesAdapter extends RecyclerView.Adapter {
     private String purpose = "";
-    private List<User> listofUsers = new ArrayList<>();
+    private List <User> listofUsers = new ArrayList <>();
     private View view;
 
-    public AttendeesAdapter(List<User> listofUsersP, String purpose) {
+    public AttendeesAdapter (List <User> listofUsersP, String purpose) {
         this.listofUsers = listofUsersP;
         this.purpose = purpose;
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder (ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         switch (purpose) {
             case "Attendees":
@@ -39,7 +39,7 @@ public class AttendeesAdapter extends RecyclerView.Adapter {
 
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder (RecyclerView.ViewHolder holder, int position) {
         switch (purpose) {
             case "Attendees":
                 AttendeesViewholder attendeesViewholder = (AttendeesViewholder) holder;
@@ -52,7 +52,7 @@ public class AttendeesAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount () {
         return listofUsers.size();
     }
 }

@@ -1,7 +1,6 @@
-package com.rooksoto.parallel.utility.widgets.recyclerview;
+package com.rooksoto.parallel.utility.widgets.recyclerview.itinerary;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -9,6 +8,7 @@ import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.objects.Session;
 
 public class ItineraryViewholder extends RecyclerView.ViewHolder {
+    private static final String TAG = "ItineraryViewholder";
     private TextView textViewHour1;
     private TextView textViewHour2;
     private TextView textViewMinute1;
@@ -18,8 +18,6 @@ public class ItineraryViewholder extends RecyclerView.ViewHolder {
     private TextView textViewName;
     private TextView textViewTagline;
     private TextView textViewLocation;
-
-    private static final String TAG = "ItineraryViewholder";
 
     public ItineraryViewholder (View itemView) {
         super(itemView);

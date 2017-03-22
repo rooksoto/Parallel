@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.utility.widgets.recyclerview;
+package com.rooksoto.parallel.utility.widgets.recyclerview.attendeesandevents;
 
 import android.net.Uri;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +18,7 @@ import com.rooksoto.parallel.objects.Answers;
 import com.rooksoto.parallel.objects.User;
 import com.rooksoto.parallel.utility.AppContext;
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
+import com.rooksoto.parallel.utility.widgets.recyclerview.profile.ProfileAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -54,10 +55,10 @@ public class AttendeesViewholder extends RecyclerView.ViewHolder {
         reference = database.getReference().child(ParallelLocation.eventID);
 
         answerRef = reference.child("attendee_list").child(userParam.getUid()).child("listofAnswers");
-        answerRef.addValueEventListener (new ValueEventListener() {
+        answerRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot question:dataSnapshot.getChildren()) {
+            public void onDataChange (DataSnapshot dataSnapshot) {
+                for (DataSnapshot question : dataSnapshot.getChildren()) {
                     listofAnswers.add(new Answers(
                             (String) question.child("question").getValue(),
                             (String) question.child("answer").getValue()
@@ -65,8 +66,10 @@ public class AttendeesViewholder extends RecyclerView.ViewHolder {
                     profileAdapter.notifyDataSetChanged();
                 }
             }
+
             @Override
-            public void onCancelled(DatabaseError databaseError) {}
+            public void onCancelled (DatabaseError databaseError) {
+            }
         });
 
         profileAdapter = new ProfileAdapter(listofAnswers);

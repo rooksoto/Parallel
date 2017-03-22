@@ -21,43 +21,38 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activityhub.ActivityHubPresenter;
-import com.rooksoto.parallel.utility.AppContext;
 import com.rooksoto.parallel.utility.OnClickEffect;
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 
-@SuppressLint("ValidFragment")
+@SuppressLint ("ValidFragment")
 public class FragmentHubEnterID extends Fragment implements BaseView {
-    private FragmentHubEnterIDPresenter fragmentHubEnterIDPresenter;
-    private ActivityHubPresenter.Listener listener;
-
-    private View view;
-    private EditText textViewEventID;
-    private Button buttonEnter;
-
-    private int containerID = R.id.content_frame;
-
+    private static final String TAG = "FragmentHubEnterID";
     ParallelLocation location;
     FirebaseDatabase database;
     DatabaseReference reference;
+    private FragmentHubEnterIDPresenter fragmentHubEnterIDPresenter;
+    private ActivityHubPresenter.Listener listener;
+    private View view;
+    private EditText textViewEventID;
+    private Button buttonEnter;
+    private int containerID = R.id.content_frame;
 
-    private static final String TAG = "FragmentHubEnterID";
+    @SuppressLint ("ValidFragment")
+    public FragmentHubEnterID (ActivityHubPresenter.Listener listener) {
+        fragmentHubEnterIDPresenter = new FragmentHubEnterIDPresenter(listener);
+        this.listener = listener;
+    }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate (@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         location = ParallelLocation.getInstance();
         database = FirebaseDatabase.getInstance();
     }
 
     @Override
-    public void onStart() {
+    public void onStart () {
         super.onStart();
-    }
-
-    @SuppressLint("ValidFragment")
-    public FragmentHubEnterID(ActivityHubPresenter.Listener listener){
-        fragmentHubEnterIDPresenter = new FragmentHubEnterIDPresenter(listener);
-        this.listener = listener;
     }
 
     @Nullable
@@ -88,7 +83,7 @@ public class FragmentHubEnterID extends Fragment implements BaseView {
             @Override
             public boolean onEditorAction (TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
-                if (actionId == EditorInfo.IME_ACTION_SEND){
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
                     checkEventID();
                     handled = false;
                 }
@@ -97,7 +92,7 @@ public class FragmentHubEnterID extends Fragment implements BaseView {
         });
     }
 
-    private void checkEventID(){
+    private void checkEventID () {
         if (textViewEventID.getText().toString().equals("")) {
             ParallelLocation.eventID = "empty";
             shakeAnimation();
