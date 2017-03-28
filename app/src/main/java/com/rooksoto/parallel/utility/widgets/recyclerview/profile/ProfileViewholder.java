@@ -7,11 +7,12 @@ import android.widget.TextView;
 
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.objects.Answers;
+import com.rooksoto.parallel.utility.Constants;
 
 public class ProfileViewholder extends RecyclerView.ViewHolder {
-    TextView textViewQuestion;
-    ImageView imageViewLeft;
-    ImageView imageViewRight;
+    private TextView textViewQuestion;
+    private ImageView imageViewLeft;
+    private ImageView imageViewRight;
 
     public ProfileViewholder (View itemView) {
         super(itemView);
@@ -22,9 +23,9 @@ public class ProfileViewholder extends RecyclerView.ViewHolder {
 
     public void bind (int position, Answers answerP) {
         textViewQuestion.setText("" + answerP.getQuestion());
-        if (answerP.getAnswer().equals("True")) {
+        if (answerP.getAnswer().equals(Constants.True)) {
             imageViewLeft.setVisibility(View.INVISIBLE);
-        } else if (answerP.getAnswer().equals("False")) {
+        } else if (answerP.getAnswer().equals(Constants.False)) {
             imageViewRight.setVisibility(View.INVISIBLE);
         } else if (answerP.getAnswer().equals("2130837628")) { // Selected Android
             imageViewLeft.setVisibility(View.INVISIBLE);

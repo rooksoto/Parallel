@@ -31,7 +31,7 @@ public class CustomAlertDialog {
                 .setView(null)
                 .setTitle("Exiting App")
                 .setMessage("Are you sure you want to close Parallel?")
-                .setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+                .setPositiveButton(Constants.Exit, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick (DialogInterface dialog, int which) {
                         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -40,7 +40,7 @@ public class CustomAlertDialog {
                         FirebaseAuth.getInstance().signOut();
                         Intent intent = new Intent(activity, ActivityLogin.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.putExtra("EXIT", true);
+                        intent.putExtra(Constants.Exit, true);
                         activity.finishAffinity();
                         activity.startActivity(intent);
                     }
@@ -56,7 +56,7 @@ public class CustomAlertDialog {
                 .setView(null)
                 .setTitle("Exiting App")
                 .setMessage(messageP)
-                .setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+                .setPositiveButton(Constants.Exit, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick (DialogInterface dialog, int which) {
                         ((Activity) contextParam).finish();
